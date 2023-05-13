@@ -25,6 +25,7 @@ app.get("/messages/latest", (req, res) => {
   const latestMessage = messages[messages.length - 1];
 
   res.json({ message: latestMessage });
+  console.log(res.json);
 });
 
 app.listen(process.env.PORT || 3000, () => {
