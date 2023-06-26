@@ -7,7 +7,7 @@ app.use(express.json()); // Required to parse JSON request body
 const messages = [];
 
 app.get("/", (req, res) => {
-  res.send("Hello, world!");
+  res.send("Hello, world from Render");
 });
 
 app.post("/messages", (req, res) => {
@@ -27,6 +27,9 @@ app.get("/messages/latest", (req, res) => {
   res.json({ message: latestMessage });
   console.log(res.json);
 });
+
+const now = new Date();
+console.log(`Server started listening at ${now}`);
 
 app.listen(process.env.PORT || 3000, () => {
   console.log("Server is running...");
