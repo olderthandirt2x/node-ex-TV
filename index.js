@@ -1,4 +1,5 @@
 require('dotenv').config(); // Load environment variables from .env file
+
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -13,7 +14,7 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
-  .then(() => console.log("Connected to MongoDB"))
+  .then(() => console.log("Connected to MongoDB with .env"))
   .catch(err => console.error("Could not connect to MongoDB:", err));
 
 // Array to store messages
