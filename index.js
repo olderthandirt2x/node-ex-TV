@@ -1,4 +1,4 @@
-require('dotenv').config(); // Load environment variables from .env file
+require("dotenv").config(); // Load environment variables from .env file
 
 const express = require("express");
 const app = express();
@@ -23,15 +23,13 @@ const movieSchema = new mongoose.Schema({
   id: Number,
   original_title: String,
   popularity: Number,
-  video: Boolean,
+  video: Boolean
 });
 
 // Create a model using the schema
 const Movie = mongoose.model("movie3", movieSchema);
 
-
-
-  // Array to store messages
+// Array to store messages
 const messages = [];
 
 app.get("/", (req, res) => {
@@ -42,26 +40,23 @@ app.post("/messages", async (req, res) => {
   const message = req.body.message;
   console.log("Received message:", message);
 
-    try {
-      // Fetch movies from the database and sort by popularity in descending order
-      const movies = await Movie.find().sort({ popularity: -1 });
-  
-      res.json(movies);
-      
-      console.log(movies);
+  try {
+    // Fetch movies from the database and sort by popularity in descending order
+    const movies = await Movie.find().sort({ popularity: -1 });
 
-    } catch (error) {
-      console.error("Error fetching movies:", error);
-      res.status(500).json({ error: "An error occurred while fetching movies" });
-    }
-  });
-  
+    res.json(movies);
 
-  // Store the message in the messages array
-  messages.push(message);
-
-  res.send("Message received!");
+    console.log(movies);
+  } catch (error) {
+    console.error("Error fetching movies:", error);
+    res.status(500).json({ error: "An error occurred while fetching movies" });
+  }
 });
+
+// Store the message in the messages array
+messages.push(message);
+
+res.send("Message received!");
 
 app.get("/messages/latest", (req, res) => {
   // Retrieve the latest message from the messages array
