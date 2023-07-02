@@ -38,7 +38,7 @@ app.get("/", (req, res) => {
   res.send("Hello, world from Render");
 });
 
-app.post("/messages", (req, res) => {
+app.post("/messages", async (req, res) => {
   const message = req.body.message;
   console.log("Received message:", message);
 
