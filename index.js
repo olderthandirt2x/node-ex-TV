@@ -47,6 +47,7 @@ app.post("/messages", async (req, res) => {
     res.json(movies);
 
     console.log(movies);
+    
   } catch (error) {
     console.error("Error fetching movies:", error);
     res.status(500).json({ error: "An error occurred while fetching movies" });
@@ -54,7 +55,7 @@ app.post("/messages", async (req, res) => {
 });
 
 // Store the message in the messages array
-messages.push(message);
+// messages.push(message);
 
 res.send("Message received!");
 
