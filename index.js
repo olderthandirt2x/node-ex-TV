@@ -40,24 +40,34 @@ app.post("/messages", async (req, res) => {
   const message = req.body.message;
   console.log("Received message:", message);
 
+  // Store the message in the messages array
+  messages.push(message);
+
+  res.send("Message received!");
+});
+// Assuming you have a MongoDB collection named 'movies'
+
+app.get("/movies/popular", async (req, res) => {
+  const minPopularity = 50;
+  const maxPopularity = 100;
+  const limit = 10; // Specify the maximum number of movies to return
+
   try {
-    // Fetch movies from the database and sort by popularity in descending order
-    const movies = await Movie.find().sort({ popularity: -1 });
+    const movies = await db
+      .collection("movies")
+      .find({
+        popularity: { $gte: minPopularity, $lte: maxPopularity }
+      })
+      .limit(limit)
+      .toArray();
 
     res.json(movies);
-
     console.log(movies);
-    
   } catch (error) {
-    console.error("Error fetching movies:", error);
-    res.status(500).json({ error: "An error occurred while fetching movies" });
+    console.log("Error fetching popular movies:", error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
-
-// Store the message in the messages array
-// messages.push(message);
-
-res.send("Message received!");
 
 app.get("/messages/latest", (req, res) => {
   // Retrieve the latest message from the messages array
