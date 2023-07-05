@@ -53,13 +53,11 @@ app.get("/movies/popular", async (req, res) => {
   const limit = 10; // Specify the maximum number of movies to return
 
   try {
-    const movies = await db
-      .collection("movies")
-      .find({
-        popularity: { $gte: minPopularity, $lte: maxPopularity }
-      })
+    const movies = await Movie.find({
+      popularity: { $gte: minPopularity, $lte: maxPopularity }
+    })
       .limit(limit)
-      .toArray();
+      .exec();
 
     res.json(movies);
     console.log(movies);
@@ -68,6 +66,7 @@ app.get("/movies/popular", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
+
 
 app.get("/messages/latest", (req, res) => {
   // Retrieve the latest message from the messages array
