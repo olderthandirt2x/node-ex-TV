@@ -59,6 +59,7 @@ app.get("/movies/popular", async (req, res) => {
       popularity: { $gte: minPopularity, $lte: maxPopularity }
     })
       .limit(limit)
+      .maxTimeMS(30000) // Increase the timeout to 30 seconds
       .exec();
 
     res.json(movies);
