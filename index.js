@@ -9,6 +9,8 @@ app.use(express.json()); // Required to parse JSON request body
 // Connect to MongoDB using Mongoose
 const mongoDbUrl = process.env.MONGO_DB_URL;
 
+console.log("mongoDbUrl:", mongoDbUrl);
+
 mongoose
   .connect(mongoDbUrl, {
     useNewUrlParser: true,
