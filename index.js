@@ -30,7 +30,7 @@ const movieSchema = new mongoose.Schema({
 });
 
 // Create a model using the schema
-const Movie = mongoose.model("movie3", movieSchema);
+const Movie = mongoose.model("movie1", movieSchema);
 
 async function fetchData() {
   const minPopularity = 50;
