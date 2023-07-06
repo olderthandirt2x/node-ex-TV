@@ -29,7 +29,28 @@ const movieSchema = new mongoose.Schema({
 });
 
 // Create a model using the schema
-const Movie = mongoose.model("movie1", movieSchema);
+const Movie = mongoose.model("movie3", movieSchema);
+
+async function fetchData() {
+  const minPopularity = 50;
+  const maxPopularity = 100;
+  const limit = 10; // Specify the maximum number of movies to return
+
+  try {
+    const movies = await Movie.find({
+      popularity: { $gte: minPopularity, $lte: maxPopularity }
+    })
+      .limit(limit)
+      .exec();
+
+    res.json(movies);
+    console.log(movies);
+  } catch (error) {
+    console.log("Error fetching popular movies:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+}
+fetchData();
 
 // Array to store messages
 const messages = [];
