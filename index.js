@@ -44,7 +44,7 @@ async function fetchData() {
       .limit(limit)
       .exec();
 
-    res.json(movies);
+    // res.json(movies);
     console.log(movies);
   } catch (error) {
     console.log("Error fetching popular movies:", error);
